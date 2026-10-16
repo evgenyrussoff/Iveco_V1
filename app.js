@@ -433,7 +433,11 @@ function renderWeekCalendar(ws){
       if(idx>=chronological.length-1||!j.endDate)return sum;
       const end=new Date(j.endDate),nextJourney=chronological[idx+1];
       const nextStart=new Date(nextJourney.startDate);
-      if(isNaN(end)||isNaN(nextStart)||localDateString(end)!==dayKey)return sum;
+      if(isNaN(end)||isNaN(nextStart))return sum;
+      // Group the rest after this journey with the same calendar day assigned
+      // to that journey, even when the rest starts after midnight.
+      const journeyDay=calendarDateForJourney(j);
+      if(isNaN(journeyDay)||localDateString(journeyDay)!==dayKey)return sum;
       const gap=Math.max(0,Math.round((nextStart-end)/60000));
       return sum+gap;
     },0);

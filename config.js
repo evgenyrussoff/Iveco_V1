@@ -1,5 +1,3 @@
-// App Conductor V5 - funcionamiento 100 % local.
-// No utiliza Google Sheets ni ningún servidor externo para guardar datos.
 const CONFIG = {
-  APP_VERSION: "5.4.3"
+  APP_VERSION: "IVECO v1.1"
 };
