@@ -1,0 +1,161 @@
+APLICACIÓN PARA CONDUCTOR IVECO v1
+================================
+
+CAMBIOS IVECO v1
+--------------
+- En Control Tacógrafo, las conducciones semanal y bisemanal aparecen en tarjetas contiguas.
+- Nueva tarjeta «Horas de conducción disponibles»: muestra el menor entre el tiempo restante hasta 56:00 h semanales y 90:00 h bisemanales.
+- Eliminado el botón manual «Recalcular». El control sigue actualizando sus cálculos al abrir la pantalla y al actualizar los datos.
+- En el diálogo de primera matrícula/cambio de matrícula se elimina «Último retorno a España / base» y se añade el tipo del último descanso semanal: 45 h o más, o descanso reducido de 24 h o más. La selección ayuda a actualizar el contador de descansos reducidos consecutivos cuando se introduce una fecha de descanso.
+- En Caducidades, el botón de la lista es «+ Añadir» y abre el formulario. Dentro del formulario, el botón de acción se llama «Guardar».
+- Ajustado el ancho del campo «Fecha del repostaje» para que coincida con los demás campos y no llegue al borde de la pantalla.
+- Optimizado camion_iveco.jpg de 1.204.555 bytes a aproximadamente 366.676 bytes, conservando el nombre del archivo y ajustando la imagen a 1280 × 1707 píxeles.
+- Corregido el Calendario semanal: las jornadas cerradas que cruzan medianoche se asignan al día en el que transcurre la mayor parte de su duración. El tiempo mostrado es el total de la jornada y no un reparto diario exacto. Los cálculos del Control Tacógrafo permanecen intactos.
+- Renovada la caché del service worker para que el dispositivo descargue los archivos de IVECO v1.
+
+INSTALACIÓN / ACTUALIZACIÓN
+---------------------------
+1. Antes de actualizar, exporta una copia de seguridad desde Ajustes.
+2. Sustituye en GitHub Pages los archivos por todos los archivos de esta versión, conservando los nombres y la estructura de carpetas.
+3. Abre la aplicación con conexión a Internet para que el navegador descargue la versión nueva. Si aparece la versión anterior, cierra por completo la PWA y vuelve a abrirla.
+4. Después de que la nueva versión se haya descargado correctamente, la caché de la PWA permite abrir la aplicación sin cobertura y utilizar los datos guardados en el dispositivo.
+
+FUNCIONAMIENTO SIN COBERTURA
+----------------------------
+- Las jornadas, repostajes, matrículas, estadísticas, historial y caducidades se guardan localmente en el dispositivo y pueden consultarse o modificarse sin conexión una vez instalada y cargada la aplicación.
+- Esta versión no utiliza Google Sheets ni sincronización con un servidor; por tanto, no hay una cola de registros pendientes que sincronizar al recuperar cobertura. Los datos permanecen en el dispositivo donde se registraron.
+- Google Maps, geolocalización y otros servicios externos pueden necesitar conexión.
+- Para cambiar de dispositivo o proteger los datos, exporta periódicamente la copia de seguridad general desde Ajustes.
+
+IMPORTANTE
+----------
+- El control de tacógrafo es orientativo y no sustituye al tacógrafo oficial ni a las instrucciones del departamento de Flota.
+- Las opciones 45 h / 24 h son una clasificación de referencia introducida por el usuario; revisa siempre las lecturas y descansos reales en el tacógrafo.
+- Las alertas de caducidad son internas a la aplicación y no generan notificaciones del sistema operativo cuando la PWA está cerrada.
+
+--- HISTORIAL DE LA VERSIÓN BASE ---
+
+APP CONDUCTOR V5.3.2 — MULTIDIOMA + CONTROL TACÓGRAFO
+====================================================
+
+Versión local para GitHub Pages. Los datos se guardan en localStorage del dispositivo.
+No utiliza Google Sheets ni servidor para almacenar los datos.
+
+NOVEDADES V5.3.2
+---------------
+- Control Tacógrafo orientativo integrado.
+- Los datos iniciales del tacógrafo se muestran solo durante la configuración inicial de la matrícula; después quedan ocultos para evitar duplicidades.
+- Al cambiar de matrícula se pregunta si se desea reiniciar Historial y Control Tacógrafo o conservarlos.
+- Las notas/incidencias pueden introducirse también al finalizar una jornada.
+- Estadísticas simplificadas: se elimina el listado de últimas jornadas.
+- Detalle de jornada: “Información detallada” y “Pausa realizada”, calculada al iniciar la siguiente jornada.
+- El cálculo de descansos diarios reducidos considera también la ventana de 24 h y la disponibilidad de la jornada anterior.
+- Conducción semanal y bisemanal: se recalculan desde las jornadas registradas por semanas fijas (lunes-domingo). El valor inicial del tacógrafo se conserva como referencia, pero no se suma automáticamente a jornadas ya registradas para evitar dobles conteos.
+- Datos iniciales junto a la matrícula: conducción semanal y bisemanal, descansos diarios reducidos, ampliaciones a 10 h, compensaciones pendientes, descansos semanales reducidos consecutivos, último descanso semanal y último retorno.
+- Aviso obligatorio al guardar los datos del tacógrafo:
+  "Los datos del tacografo que aparecen en ésta aplicacion son orientativos. En caso de dudas es mejor contactar con departamento de Flota. Gracias"
+- Cálculo orientativo de 56 h semanales, 90 h en dos semanas y 2 ampliaciones de 10 h.
+- Control orientativo de máximo 3 descansos diarios reducidos.
+- Registro de descansos semanales, reducidos, realizados fuera de España y compensaciones.
+- Control orientativo de la regla de retorno de 4 semanas / 3 semanas cuando proceda.
+- Contador en pantalla principal: duración de jornada actual o pausa desde la última jornada, incluyendo días con una decimal.
+- Estadísticas: Km mes en curso, Km totales, Km del año, velocidad media y consumo medio. Se eliminan Horas conducidas y Disponibilidad de los cuadros principales.
+- Historial de jornadas: cada jornada se abre en una ficha detallada con inicio, fin, kilómetros, lugares y enlaces a Google Maps.
+- Incidencias/notas del conductor. Se muestra únicamente un icono 📝 en el historial cuando existe una nota.
+- Historial de repostajes consultable desde la pantalla principal.
+- Se mantiene el botón externo "Restricciones para Camiones" debajo de la matrícula, abriendo una pestaña nueva.
+- Copias de seguridad JSON compatibles con los datos locales anteriores.
+
+IDIOMAS
+-------
+Español, portugués, rumano, inglés, francés, italiano y alemán.
+El idioma se detecta automáticamente mediante navigator.language. Si no está soportado, se utiliza español.
+
+IMPORTANTE SOBRE EL CONTROL TACÓGRAFO
+--------------------------------------
+Esta función es una herramienta auxiliar y orientativa. No sustituye al tacógrafo, sus registros oficiales ni las instrucciones de la empresa o del departamento de Flota.
+Las comprobaciones de descansos y retorno dependen de datos que la aplicación no puede reconstruir por sí sola. El conductor debe mantener los datos iniciales actualizados y registrar los descansos relevantes.
+
+INSTALACIÓN EN GITHUB PAGES
+----------------------------
+1. Sube todos los archivos de esta carpeta al repositorio.
+2. Activa GitHub Pages desde Settings > Pages.
+3. Selecciona la rama y carpeta publicadas.
+4. Abre la URL HTTPS en el teléfono.
+5. En iPhone: Safari > Compartir > Añadir a pantalla de inicio.
+6. En Android: navegador compatible > Añadir a pantalla de inicio / Instalar aplicación.
+
+ACTUALIZACIÓN
+-------------
+Después de sustituir archivos en GitHub Pages, abre la URL HTTPS, recarga y vuelve a abrir la PWA.
+Si el teléfono mantiene una versión antigua por caché, elimina la PWA instalada y vuelve a añadirla.
+
+RESTRICCIONES PARA CAMIONES
+---------------------------
+El botón abre en una pestaña nueva:
+https://payonline.guretruck.com/Restrictions/Restrictions.aspx/GetRestricciones
+
+V5.2.3.1 — CORRECCIÓN CONTROL TACÓGRAFO
+- Los campos de conducción semanal y bisemanal aceptan entrada numérica tipo 2804 y la muestran automáticamente como 28:04.
+- Se elimina del formulario inicial el campo manual de compensación pendiente.
+- La compensación pendiente se calcula a partir de los descansos semanales reducidos registrados en la aplicación.
+- Se mantiene la tarjeta informativa de compensación pendiente dentro del Control Tacógrafo.
+
+- V5.2.3: corregida la pantalla principal para que la duración de la pausa desde la última jornada se muestre una sola vez.
+
+
+V5.2.6 — CORRECCIONES
+- La franja visual de la pantalla principal vuelve a ocupar todo el ancho; no se modifica el diseño de las demás pantallas.
+- Las ampliaciones a 10 h usadas se reinician automáticamente al comenzar una nueva semana (lunes).
+- Una jornada con 10:00 h o más de conducción cuenta como ampliación a 10 h; 9:xx h no se cuenta como ampliación.
+- Al iniciar una nueva jornada, si existe una pausa de 24 h o más desde la última jornada cerrada, se registra automáticamente como descanso semanal orientativo.
+- Al detectar o registrar un descanso semanal se reinicia el contador de descansos diarios reducidos.
+- El próximo límite para iniciar descanso semanal se calcula desde el final del último descanso semanal registrado/detectado, añadiendo 6 periodos de 24 h.
+- Los descansos detectados automáticamente se muestran en el historial con el indicador ⚙️.
+
+
+V5.2.6: las ampliaciones a 10 h se contabilizan cuando la conducción diaria supera 9:00 h (>540 min), y los descansos semanales manuales se conservan junto con los detectados automáticamente.
+
+
+CAMBIOS V5.3.2
+---------------
+- Botón “Cambiar matrícula” para desplegar el formulario de configuración inicial con campos vacíos; al guardar los campos se limpian y se ocultan.
+- Al cambiar de matrícula se puede reiniciar Historial y Control Tacógrafo o conservar los datos existentes.
+- Estadísticas: botón “Cambiar periodo” para seleccionar el primer día del periodo mensual; el día final se calcula automáticamente como el día anterior del mes siguiente.
+- Historial: “Historial de repostajes” con borde más visible.
+- Detalle de jornada: la flecha superior y el botón Volver regresan directamente a Historial.
+- Pausa realizada: se calcula en la jornada anterior cuando se inicia una nueva jornada, incluso cuando la nueva jornada permanece abierta.
+- Botón “Recalcular” en Control Tacógrafo para reconstruir los contadores desde las jornadas y descansos guardados.
+- Conducción semanal: cálculo por semana fija lunes-domingo.
+- Conducción bisemanal: suma de las dos semanas fijas consecutivas, evitando sumar dos veces una misma jornada.
+- Las jornadas que cruzan medianoche se asignan provisionalmente a la semana de inicio, y la aplicación muestra un aviso porque no dispone del reparto exacto de minutos de conducción por día.
+- Alertas anticipadas para 56 h semanales, 90 h bisemanales, ampliaciones de 10 h, descansos diarios reducidos y próximo descanso semanal.
+- Calendario semanal del conductor con conducción diaria y descansos detectados.
+
+CAMBIOS V5.3.3
+---------------
+- En Control Tacógrafo, los botones “Recalcular” y “Actualizar horas reales” aparecen juntos y ocupan aproximadamente la mitad del ancho cada uno.
+- “Actualizar horas reales” permite introducir en cualquier momento las lecturas reales de conducción semanal y bisemanal que muestra el tacógrafo.
+- El botón “Actualizar horas reales” queda desactivado mientras existe una jornada abierta; solo se puede usar con la jornada cerrada.
+- Las lecturas introducidas se guardan como nuevo punto de partida y la aplicación continúa sumando las nuevas jornadas a partir de ese momento.
+- Si el conductor no actualiza manualmente las lecturas, la aplicación mantiene su cálculo automático.
+- Se mantiene el aviso automático para jornadas que cruzan el cambio de semana.
+- Se activa el botón “Recalcular” para recalcular y guardar los contadores del tacógrafo.
+
+
+Correcciones V5.4.1: tarjeta de próxima caducidad, botón + Añadir al crear documentos, mejora del enfoque/zoom móvil, aviso al alcanzar el límite semanal, ajuste del campo fecha de repostaje y mejora de preconexión para Restricciones para Camiones.
+
+
+Correcciones V5.4.2: cálculo semanal y bisemanal con ventana móvil de dos semanas y caducidad de la parte más antigua de una lectura manual al cruzar el lunes.
+
+V5.4.4: añadido historial de kilómetros por periodos mensuales configurados (por defecto del día 26 al 25), independiente de las estadísticas de consumo.
+
+
+IVECO v1: el Calendario semanal asigna las jornadas que cruzan medianoche al día que contiene la mayor parte de su duración; en caso de empate, utiliza el día de inicio. El total de conducción de la jornada se muestra en ese día, sin modificar el cálculo semanal/bisemanal del Control Tacógrafo ni los datos guardados.
+
+
+Personalización IVECO v1:
+- Fondo: camion_iveco.jpg (fotografía IVECO facilitada).
+- Iconos de la aplicación: icon-192.png e icon-512.png (silueta de camión en azul).
+- Interfaz recoloreada a tonos azules.
+- Basada en la versión 5.4.7; se conservan las funciones y los datos locales.
